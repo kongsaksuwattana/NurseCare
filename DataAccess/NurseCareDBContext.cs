@@ -17,6 +17,7 @@ namespace NurseCare.DataAccess
         public DbSet<UpdateBedInfo> UpdateBedInfos { get; set; }
         public DbSet<UpdateTeamInfo> UpdateTeamInfos { get; set; }
         public DbSet<UserLogin> UserLogins { get; set; }
+        public DbSet<Bed> Beds { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {    
             if (!optionsBuilder.IsConfigured)

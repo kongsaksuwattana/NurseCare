@@ -5,7 +5,7 @@
 
     <ScrollView>
         <VerticalStackLayout>
-            <Label Text="Welcome to NurseCare"               
+            <Label Text="Bed Turn Alert"               
                FontSize="Title"
                HorizontalOptions="Center"
                VerticalOptions="Start"

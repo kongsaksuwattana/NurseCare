@@ -23,12 +23,14 @@
         </HorizontalStackLayout>-->
         <Grid ColumnDefinitions="*,Auto">
             <Picker Grid.Column="0" x:Name="NursePicker" Title="Nurse" SelectedIndexChanged="NursePicker_SelectedIndexChanged"/>
-            <Button Grid.Column="1" x:Name="DelNurse" 
+            <ImageButton Grid.Column="1" x:Name="DelNurse" 
                     Padding="0" Margin="0"
                     BackgroundColor="Transparent"
-                    ImageSource="trashcansmall.png"
+                    Source="trashcansmall.png"
                     MinimumHeightRequest="20"
-                    MaximumHeightRequest="40"
+                    MaximumHeightRequest="30"
+                    MaximumWidthRequest="40"
+                    Clicked="DelNurse_Clicked"
                     />
         </Grid>
         <Button x:Name="UpdateButton"
@@ -38,7 +40,7 @@
             x:Name="Empty" 
             StrokeThickness="2"
             BackgroundColor="Grey"
-            Margin="30"
+            Margin="0,20"            
            />
         <Label 
          Text="Add Bed"
@@ -46,14 +48,30 @@
          HorizontalOptions="Start"
          FontSize="Medium" 
          />
-        <Grid ColumnDefinitions="*,*,*">
-        <Entry Grid.Column="0" x:Name="BedIdEntry" Placeholder="Bed ID" Margin="10"/>        
-        <Picker Grid.Column="1" x:Name="IsOccupiedPicker" Title="Team support" Margin="10"/>
-        <Button Grid.Column="2" x:Name="AddBedButton"
+        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,*">
+        <Entry Grid.Column="0" x:Name="BedIdEntry" Placeholder="Bed ID" Margin="10"/>
+        <Picker Grid.Column="1" x:Name="TeamSupportBed" Title="Team support" Margin="10"/>
+        <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" x:Name="AddBedButton"
                 Text="Add Bed" 
-                Clicked="AddBedButton_Clicked"
-                MaximumWidthRequest="120"
+                Clicked="AddBedButton_Clicked"                
                 MaximumHeightRequest="40"/>
         </Grid>
+        <Label 
+            Text="Select Bed"
+            VerticalOptions="Center" 
+            HorizontalOptions="Start"
+            FontSize="Medium"
+            Margin="10,10,10,0"/>
+        <Picker 
+            x:Name="BedPicker" 
+            Title="Select Bed" 
+            SelectedIndexChanged="BedPicker_SelectedIndexChanged"
+            Margin="10,0"
+            />
+        <Label 
+            x:Name="ResultLabel"            
+            FontSize="Small"
+            HorizontalOptions="Center"           
+            Margin="10,0"/>
     </VerticalStackLayout>
 </ContentView>

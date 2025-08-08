@@ -5,7 +5,7 @@
              Title="LoginPage">
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to Nurse Care"
+            Text="Bed Turn Alert"
             VerticalOptions="Center" 
             HorizontalOptions="Center" 
             FontSize="Title"

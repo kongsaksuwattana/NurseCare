@@ -1,3 +1,5 @@
+using Org.BouncyCastle.Asn1.IsisMtt.X509;
+
 namespace NurseCare;
 
 public partial class PatientPage : ContentPage
@@ -34,4 +36,12 @@ public partial class PatientPage : ContentPage
     public void OnRegisterPatientClicked(object sender, EventArgs e)
 	{
 	}
+
+    private void IsDischargeCheck_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        //IsDischargeCheck.IsChecked? PatientDischargeDate
+        if (IsDischargeCheck.IsChecked)
+            PatientDischargeDate.IsEnabled = true;
+        else PatientDischargeDate.IsEnabled = false;
+    }
 }

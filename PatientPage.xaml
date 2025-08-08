@@ -66,9 +66,10 @@
                         <Label Text="Admission Date" VerticalTextAlignment="Center"/>
                         <DatePicker x:Name="PatientAdmissionDate" MinimumWidthRequest="200" Margin="10,0"/>
                     </HorizontalStackLayout>
-                    <HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <CheckBox x:Name="IsDischargeCheck" Margin="0" WidthRequest="30" CheckedChanged="IsDischargeCheck_CheckedChanged"/>
                         <Label Text="Discharge Date" VerticalTextAlignment="Center"/>
-                    <DatePicker x:Name="PatientDischargeDate" MinimumWidthRequest="200" Margin="10,0"/>
+                        <DatePicker x:Name="PatientDischargeDate" MinimumWidthRequest="200" Margin="10,0" IsEnabled="False"/>
                 </HorizontalStackLayout>
                 <Entry x:Name="PatientContactPerson" Placeholder="Contact Person"/>
                 <Entry x:Name="PatientContactPhone" Placeholder="Contact Phone" Keyboard="Telephone"/>

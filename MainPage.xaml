@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NurseCare.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout>
+            <Label Text="Welcome to NurseCare"               
+               FontSize="Title"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"
+               Margin="20"/>    
+            <Grid x:Name="MainGrid">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="OrientationStates">
+                    <VisualState x:Name="Portrait">
+                        <VisualState.Setters>
+                            <Setter TargetName="MainGrid" Property="RowDefinitions">
+                                <RowDefinitionCollection>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>                                    
+                                </RowDefinitionCollection>
+                            </Setter>
+                            <Setter TargetName="MainGrid" Property="ColumnDefinitions">
+                                <ColumnDefinitionCollection>
+                                    <ColumnDefinition Width="*"/>
+                                </ColumnDefinitionCollection>
+                            </Setter>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="Landscape">
+                        <VisualState.Setters>
+                            <Setter TargetName="MainGrid" Property="RowDefinitions">
+                                <RowDefinitionCollection>
+                                    <RowDefinition Height="*"/>                                   
+                                </RowDefinitionCollection>
+                            </Setter>
+                            <Setter TargetName="MainGrid" Property="ColumnDefinitions">
+                                <ColumnDefinitionCollection>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </ColumnDefinitionCollection>
+                            </Setter>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            
+            
+            
+            <Button Text="พยาบาล"
+                    Grid.Row="0" Grid.Column="0"                    
+                    VerticalOptions="Center"
+                    Margin="10"
+                    ImageSource="nurse_1.png"
+                    MinimumWidthRequest="100"
+                    MinimumHeightRequest="100"
+                    MaximumHeightRequest="400"
+                    MaximumWidthRequest="400"
+                    Clicked="OnRegisterNurseClicked"/>
+            <Button Text="ผู้ป่วย"
+                    Grid.Row="1" Grid.Column="0"                    
+                    VerticalOptions="Center"
+                    MaximumHeightRequest="400"
+                    MaximumWidthRequest="400"
+                    Margin="10"
+                    ImageSource="patient_2.png"
+                    Clicked="OnRegisterPatientClicked"/>
+        </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

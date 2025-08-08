@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NurseCare.UpdateTeamView"
+             Loaded="ContentView_Loaded">
+    <VerticalStackLayout Padding="16" Spacing="8">        
+        <Label 
+            Text="Update Team"
+            VerticalOptions="Center" 
+            HorizontalOptions="Start"
+            FontSize="Medium"/>
+        <Grid ColumnDefinitions="Auto,*">
+        <Label Grid.Column="0" Text="From team" VerticalTextAlignment="Center" Margin="0,0,5,0" WidthRequest="80"/>
+            <Entry Grid.Column="1" x:Name ="TeamPickerFrom"  IsEnabled="False"/>
+        </Grid>
+        <Grid ColumnDefinitions="Auto,*">
+            <Label Grid.Column="0" Text="To team" VerticalTextAlignment="Center" Margin="0,0,5,0" WidthRequest="80"/>
+            <Picker Grid.Column="1" x:Name ="TeamPickerTo" Title="To Team" />
+        </Grid>
+        <!--<HorizontalStackLayout>
+            <CheckBox x:Name="AllTeamCheck" CheckedChanged="AllTeamCheck_CheckedChanged"/>
+            <Label Text="Select all team" VerticalTextAlignment="Center"/>
+        </HorizontalStackLayout>-->
+        <Grid ColumnDefinitions="*,Auto">
+            <Picker Grid.Column="0" x:Name="NursePicker" Title="Nurse" SelectedIndexChanged="NursePicker_SelectedIndexChanged"/>
+            <Button Grid.Column="1" x:Name="DelNurse" 
+                    Padding="0" Margin="0"
+                    BackgroundColor="Transparent"
+                    ImageSource="trashcansmall.png"
+                    MinimumHeightRequest="20"
+                    MaximumHeightRequest="40"
+                    />
+        </Grid>
+        <Button x:Name="UpdateButton"
+                Text="Update Team" 
+                Clicked="UpdateButton_Clicked"/>
+        <Border 
+            x:Name="Empty" 
+            StrokeThickness="2"
+            BackgroundColor="Grey"
+            Margin="30"
+           />
+        <Label 
+         Text="Add Bed"
+         VerticalOptions="Center" 
+         HorizontalOptions="Start"
+         FontSize="Medium" 
+         />
+        <Grid ColumnDefinitions="*,*,*">
+        <Entry Grid.Column="0" x:Name="BedIdEntry" Placeholder="Bed ID" Margin="10"/>        
+        <Picker Grid.Column="1" x:Name="IsOccupiedPicker" Title="Team support" Margin="10"/>
+        <Button Grid.Column="2" x:Name="AddBedButton"
+                Text="Add Bed" 
+                Clicked="AddBedButton_Clicked"
+                MaximumWidthRequest="120"
+                MaximumHeightRequest="40"/>
+        </Grid>
+    </VerticalStackLayout>
+</ContentView>

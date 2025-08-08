@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NurseCare.LoginPage"
+             Title="LoginPage">
+    <VerticalStackLayout>
+        <Label 
+            Text="Welcome to Nurse Care"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" 
+            FontSize="Title"
+            Margin="20"/>
+        <Entry 
+            x:Name="UsernameEntry" 
+            Placeholder="Username" 
+            Margin="10" />
+        <Entry 
+            x:Name="PasswordEntry"
+            Placeholder="Password"            
+            Margin="10" IsPassword="True"/>
+        <Grid ColumnDefinitions="Auto,*,*,*" Margin="20">
+            <CheckBox Grid.Column="0" x:Name="RememberCheckbox" Margin="0" />
+            <Label Grid.Column="1" Text="Remember Me" VerticalOptions="Center" HorizontalOptions="Start" />
+            <Button Grid.Column="2" x:Name="RegisterButton" Text="Register" Clicked="RegisterButton_Clicked" Margin="5"/>
+            <Button Grid.Column="3" x:Name="LoginButton" Text="Login" Clicked="LoginButton_Clicked" Margin="5"/>            
+            
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

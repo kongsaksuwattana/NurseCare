@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NurseCare.TurnBedriddenView">
+    <VerticalStackLayout  Padding="10" Spacing="6">
+        <Label 
+            Text="Turning Bedridden"
+            VerticalOptions="Center" 
+            HorizontalOptions="Start" 
+            FontSize="Medium"/>
+        <Grid x:Name="SearchViewGrid"/>       
+        <Entry x:Name="PatientNameEntry" Placeholder="Patient Name"/>
+        <Grid ColumnDefinitions="Auto,*">
+            <Entry Grid.Column="0" x:Name="AgeEntry" Placeholder="Age"/>
+            <Entry Grid.Column="1" x:Name="DiseaseEntry" Placeholder="Disease"/>
+        </Grid>
+        <Grid ColumnDefinitions="*,*,*">
+            <Entry Grid.Column="0" x:Name="BedIDEntry" Placeholder="Bed ID" IsEnabled="False"/>
+            <Button Grid.Column="1" x:Name="ChangeBedButton" Text="Change" MaximumWidthRequest="80" Clicked="ChangeBedButton_Clicked"/>
+            <Picker Grid.Column="2" x:Name="ChangedBedIdPicker"/>
+        </Grid>
+        
+        <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*,*">
+            <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" FontSize="Small" Text="Turning Time"/>
+            <DatePicker Grid.Column="0" Grid.Row="1" x:Name="TurnDate"/>
+            <TimePicker Grid.Column="1" Grid.Row="1" x:Name="TurnTime"/>
+            <Label Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" FontSize="Small" Text="Next Turning Time"/>
+            <DatePicker Grid.Column="0" Grid.Row="3" x:Name="NextTurnDate"/>
+            <TimePicker Grid.Column="1" Grid.Row="3" x:Name="NextTurnTime"/>
+        </Grid>
+        <Button x:Name="SaveTurnButton" Clicked="SaveTurnButton_Clicked" Text="Record"/>
+    </VerticalStackLayout>
+</ContentView>

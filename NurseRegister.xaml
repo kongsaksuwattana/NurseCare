@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="NurseCare.NurseRegister"
+             Title="Nurse">
+    <ContentPage.Resources>
+        <Style TargetType="Entry">
+            <Setter Property="Margin" Value="0,4"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+    </ContentPage.Resources>
+    <ScrollView>
+    <Grid x:Name="MainGrid"
+      Padding="20"
+      RowSpacing="16"
+      ColumnSpacing="24">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="OrientationStates">
+                <VisualState x:Name="Portrait">
+                    <VisualState.Setters>
+                        <Setter TargetName="MainGrid" Property="RowDefinitions">
+                            <RowDefinitionCollection>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </RowDefinitionCollection>
+                        </Setter>
+                        <Setter TargetName="MainGrid" Property="ColumnDefinitions">
+                            <ColumnDefinitionCollection>
+                                <ColumnDefinition Width="*"/>
+                            </ColumnDefinitionCollection>
+                        </Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Landscape">
+                    <VisualState.Setters>
+                        <Setter TargetName="MainGrid" Property="RowDefinitions">
+                            <RowDefinitionCollection>
+                                <RowDefinition Height="*"/>
+                            </RowDefinitionCollection>
+                        </Setter>
+                        <Setter TargetName="MainGrid" Property="ColumnDefinitions">
+                            <ColumnDefinitionCollection>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </ColumnDefinitionCollection>
+                        </Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
+
+        <!-- Nurse Registration -->
+
+        <Frame Grid.Row="0" Grid.Column="0"
+            Grid.RowSpan="1"
+            BorderColor="LightGray"
+            CornerRadius="12"
+            HasShadow="True">
+             <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+                <Label Grid.Column="0" Grid.Row="0" Text="Nurse Registration" FontSize="Medium"/>
+                <Image Grid.Column="1" Grid.Row="0" Source="nurse_1.png" MaximumHeightRequest="80" HorizontalOptions="End"/>
+
+                <VerticalStackLayout Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Padding="16" Spacing="8" IsVisible="False">               
+                    <Entry x:Name="NurseFirstName" Placeholder="First Name"/>
+                    <Entry x:Name="NurseLastName" Placeholder="Last Name"/>
+                    <Entry x:Name="NurseNickName" Placeholder="Nick Name"/>
+                    <Entry x:Name="NurseEmployeeId" Placeholder="Employee ID"/>
+                    <!--<DatePicker x:Name="NurseDateOfHire"/>-->
+                    <Entry x:Name="NurseDepartment" Placeholder="Department"/>
+                    <Picker x:Name="NurseTeamPicker" Title="Team"/>
+                    <Button Text="Register Nurse" Clicked="OnRegisterNurseClicked"/>
+                </VerticalStackLayout>
+            </Grid>
+        </Frame>
+
+        <Frame Grid.Row="1" Grid.Column="0"
+               Margin="0"
+               BorderColor="LightGray"
+               CornerRadius="12"
+               HasShadow="True"
+            >
+            <Grid x:Name="ChangeTeamView"></Grid>
+        </Frame>
+        
+    </Grid>
+    </ScrollView>
+</ContentPage>

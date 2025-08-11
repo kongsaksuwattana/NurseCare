@@ -4,7 +4,7 @@ namespace NurseCare;
 
 public partial class SearchHNView : ContentView
 {
-    CameraBarcodeReaderView barcodeReader;
+    //CameraBarcodeReaderView barcodeReader;
 
     public SearchHNView()
 	{

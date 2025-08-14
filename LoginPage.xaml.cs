@@ -44,7 +44,10 @@ public partial class LoginPage : ContentPage
                 await DisplayAlert("Error", "Nurse not found", "OK");
                 return;
             }
-            Preferences.Set("personId", personId);          
+            Preferences.Set("personId", personId); 
+            Preferences.Set("firstName", nurse.FirstName);
+            Preferences.Set("lastName", nurse.LastName);
+            Preferences.Set("team", nurse.TeamName.ToString());
             await DisplayAlert("Success", $"Logged in! by {username}", "OK");
             // Navigate to main app page
             await Navigation.PushAsync(new MainPage());

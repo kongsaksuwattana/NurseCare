@@ -65,7 +65,7 @@
                         <Entry x:Name="PatientFirstName" Placeholder="First Name"/>
                         <Entry x:Name="PatientLastName" Placeholder="Last Name"/>
                         <HorizontalStackLayout>
-                            <Entry x:Name="PatientHN" Placeholder="HN"/>
+                            <Entry x:Name="PatientHN" Placeholder="HN" WidthRequest="180"/>
                             <Picker x:Name="BedIdPicker" Title="เลือกเตียง"/>
                         </HorizontalStackLayout>
                         <Entry x:Name="PatientDisease" Placeholder="Disease"/>

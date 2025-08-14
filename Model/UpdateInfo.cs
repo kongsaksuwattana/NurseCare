@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NurseCare.Model
-{
+{    
     public enum TeamName
     {
         TeamA,
@@ -16,6 +16,13 @@ namespace NurseCare.Model
         TeamC,
         TeamD
     }
+    public enum TurnPosture
+    {
+        Left,
+        Right,
+        Supine
+    }
+
     [Table("UpdateBedInfo")]
     public class UpdateBedInfo
     {        
@@ -47,7 +54,26 @@ namespace NurseCare.Model
 
         [Column("IsManualKeyed")]
         public bool IsManualKeyed { get; set; } = false;
+
+        [Column("ImageUrl")]
+        public string? ImageUrl { get; set; } = string.Empty; // Optional image URL for the update
+
+        [Column("IsNotifying")]
+        public bool IsNotifying { get; set; } = false;
     }
+
+    [Table("UpdateBedInfoAndEffect")]
+    public class UpdateBedInfoAndEffect : UpdateBedInfo
+    {
+        [Column("TeamSupport")]
+        public TeamName? TeamSupport { get; set; } = TeamName.TeamA; // Default to TeamA
+        public TurnPosture? Posture { get; set; } = TurnPosture.Supine;
+        public bool Occiput { get; set; } = false;
+        public bool Scapula { get; set; } = false;
+        public bool Sacrum_Coccyx { get; set; } = false;
+        public bool Heel { get; set; } = false;
+    }
+
 
     [PrimaryKey("updateId")]
     [Table("UpdateTeamInfo")]
@@ -76,7 +102,7 @@ namespace NurseCare.Model
         public string BedId { get; set; } = string.Empty;
 
         [Column("TeamSupport")]
-        public TeamName TeamSupport { get; set; } = TeamName.TeamA;
+        public TeamName? TeamSupport { get; set; } = TeamName.TeamA;
 
         [Column("IsOccupied")]
         public bool IsOccupied { get; set; } = false;

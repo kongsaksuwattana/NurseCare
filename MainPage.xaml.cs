@@ -1,4 +1,7 @@
-﻿namespace NurseCare
+﻿using NurseCare.DataAccess;
+using Plugin.LocalNotification;
+
+namespace NurseCare
 {
     public partial class MainPage : ContentPage
     {
@@ -8,6 +11,9 @@
         {
             InitializeComponent();
             this.SizeChanged += RegisterPage_SizeChanged;
+            TurningMonitor.StopMonitoring();
+            TurningMonitor.StartMonitoring();
+            
         }
         private void RegisterPage_SizeChanged(object sender, EventArgs e)
         {
@@ -40,6 +46,34 @@
         {
             // Navigate to the RegisterPatient page
             Navigation.PushAsync(new PatientPage());
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            var notification = new NotificationRequest
+            {
+                NotificationId = 1000 + 11,
+                Title = "Test Notification",
+                Description = $"พลิกตัวผู้ป่วยเตียง เวลา {DateTime.Now:dd-MM-yyyy hh:mm:ss}",
+                //ReturningData = "TurningReminder",
+                //BadgeNumber = 1,
+                CategoryType = NotificationCategoryType.Alarm,
+                Schedule = new NotificationRequestSchedule
+                {
+                    NotifyTime = DateTime.Now.AddSeconds(5),
+                    NotifyAutoCancelTime = DateTime.Now.AddMinutes(10), // Auto cancel after 5 minutes
+                    RepeatType = NotificationRepeat.TimeInterval,
+                    NotifyRepeatInterval = TimeSpan.FromMinutes(1), // Repeat every minute
+                   
+                    // Show notification immediately for testing
+                },
+                //NotifyTime = DateTime.Now
+            };
+            //LocalNotificationCenter.Current.Clear(); // Clear previous notifications
+#if ANDROID
+           
+#endif
+            LocalNotificationCenter.Current.Show(notification);
         }
         //private void OnCounterClicked(object sender, EventArgs e)
         //{

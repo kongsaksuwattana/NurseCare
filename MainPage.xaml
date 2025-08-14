@@ -9,7 +9,8 @@
                FontSize="Title"
                HorizontalOptions="Center"
                VerticalOptions="Start"
-               Margin="20"/>    
+               Margin="20"/>
+            <!--<Button Text="Test notify" Clicked="Button_Clicked"/>-->
             <Grid x:Name="MainGrid">
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroup x:Name="OrientationStates">
@@ -66,7 +67,9 @@
                     Margin="10"
                     ImageSource="patient_2.png"
                     Clicked="OnRegisterPatientClicked"/>
+                
         </Grid>
+        
         </VerticalStackLayout>
     </ScrollView>
 

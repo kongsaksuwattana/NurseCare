@@ -8,6 +8,7 @@ public partial class PatientPage : ContentPage
 {
     TurnBedriddenView TurnBedriddenView = new TurnBedriddenView();
     NurseCareDataQuery dataQuery = new NurseCareDataQuery();
+    const int turningIntervalHours = 2; // Set the turning interval to 2 hours
     public PatientPage()
 	{
 		InitializeComponent();
@@ -45,11 +46,14 @@ public partial class PatientPage : ContentPage
             LastName = PatientLastName.Text,
             DateOfBirth = PatientDOB.Date,
             Disease = PatientDisease.Text,
+            BedId = BedIdPicker.SelectedItem?.ToString(),
             DateOfAdmission = PatientAdmissionDate.Date,
             DateOfDischarge = IsDischargeCheck.IsChecked ? PatientDischargeDate.Date : null,
             ContactPerson = PatientContactPhone.Text,
             ContactPhone = PatientContactPhone.Text,
         };
+        
+        
         if (string.IsNullOrWhiteSpace(patient.HN) || string.IsNullOrWhiteSpace(patient.FirstName) || string.IsNullOrWhiteSpace(patient.LastName))
         {
             DisplayAlert("Error", "กรุณากรอกข้อมูลให้ครบถ้วน_", "OK");
@@ -70,12 +74,41 @@ public partial class PatientPage : ContentPage
             DisplayAlert("Error", "วันเกิดไม่สามารถบันทึกล่วงหน้าได้", "OK");
             return;
         }
-
+        if(BedIdPicker.SelectedIndex == -1)
+        {
+            DisplayAlert("Error", "กรุณาเลือกเตียงที่ว่าง", "OK");
+            return;
+        }
+        Bed? bed = dataQuery.GetBedById(BedIdPicker.SelectedItem.ToString());
+        if (bed == null)
+        {
+            DisplayAlert("Error", "ไม่พบเตียงที่เลือก", "OK");
+            return;
+        }
         try
         {
+            string teamsuport = Preferences.Get("team", "");
+            TeamName? teamName = string.IsNullOrEmpty(teamsuport) ? null : (TeamName)Enum.Parse(typeof(TeamName), teamsuport);
+            UpdateBedInfo updateBedInfo = new UpdateBedInfo
+            {
+                BedId = bed.BedId,
+                PatientHN = patient.HN,
+                PatientId = patient.Id,
+                NurseId = Preferences.Get("personId", ""),
+                TurningTime = DateTime.Now,
+                NextTurningTime = DateTime.Now.AddHours(turningIntervalHours), // Set next turning time to 2 hours later
+                UpdateDateTime = DateTime.Now,
+                IsManualKeyed = false // Set to false as this is an automatic entry
+            };
+
+
             using (var db = new NurseCareDBContext())
             {
                 db.Patients.Add(patient);
+                bed.IsOccupied = true; // Mark the bed as occupied
+                bed.TeamSupport = teamName; // Set the team support from preferences
+                db.Update(bed); // Update the bed status
+                db.UpdateBedInfos.Add(updateBedInfo); // Add the update bed info
                 db.SaveChanges();
             }
             DisplayAlert("Success", "บันทึกข้อมูลผู้ป่วยเรียบร้อยแล้ว", "OK");
@@ -90,6 +123,8 @@ public partial class PatientPage : ContentPage
             PatientDischargeDate.Date = DateTime.Now;
             PatientContactPerson.Text = string.Empty;
             PatientContactPhone.Text = string.Empty;
+
+
         }
         catch (Exception ex)
         {

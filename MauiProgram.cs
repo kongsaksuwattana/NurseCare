@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using ZXing.Net.Maui;
-using ZXing.Net.Maui.Controls;
+//using ZXing.Net.Maui;
+//using ZXing.Net.Maui.Controls;
 using BarcodeScanning;
-
+using Plugin.LocalNotification;
 namespace NurseCare
 {
     public static class MauiProgram
@@ -12,8 +12,9 @@ namespace NurseCare
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                .UseBarcodeReader() // Register ZXing.Net.Maui for barcode scanning
+                //.UseBarcodeReader() // Register ZXing.Net.Maui for barcode scanning
                 .UseBarcodeScanning() // Register BarcodeScanning for barcode scanning
+                .UseLocalNotification()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

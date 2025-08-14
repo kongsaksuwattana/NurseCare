@@ -30,5 +30,11 @@
 	<string>Assets.xcassets/appicon.appiconset</string>
   <key>NSCameraUsageDescription</key>
   <string>This app uses barcode scanning to patient HN</string>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>We need access to your photo library</string>
+  <key>BGTaskSchedulerPermittedIdentifiers</key>
+  <array>
+    <string>com.thesolutions.nursecare.refresh</string>
+  </array>
 </dict>
 </plist>

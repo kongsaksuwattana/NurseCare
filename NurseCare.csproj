@@ -22,20 +22,22 @@
 		<NullabilityInfoContextSupport>true</NullabilityInfoContextSupport>
 		<!-- Display name -->
 		<ApplicationTitle>NurseCare</ApplicationTitle>
-
+		
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.nursecare</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
-
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+    <PublishTrimmed>true</PublishTrimmed>
+    
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">26.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+		<PackageIcon>nurse_noBG_128.png</PackageIcon>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='net8.0-ios'">
@@ -64,6 +66,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="BarcodeScanning.Native.Maui" Version="1.8.0" />
+		<PackageReference Include="FluentFTP" Version="53.0.1" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.11">
 		  <PrivateAssets>all</PrivateAssets>
@@ -73,6 +76,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
 		<PackageReference Include="MySql.EntityFrameworkCore" Version="8.0.11" />
+		<PackageReference Include="Plugin.LocalNotification" Version="12.0.2" />
 		<PackageReference Include="System.Private.Uri" Version="4.3.2" />
 		<PackageReference Include="ZXing.Net.Maui" Version="0.4.0" />
 		<PackageReference Include="ZXing.Net.Maui.Controls" Version="0.4.0" />
@@ -94,6 +98,9 @@
 	  <MauiXaml Update="NurseRegister.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="PatientHitoryPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="PatientPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -109,6 +116,9 @@
 	  <MauiXaml Update="UpdateTeamView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UserLoggedInPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UserRegister.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -117,6 +127,10 @@
 	<ItemGroup>
 	  <None Update="LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
+	  </None>
+	  <None Update="Resources\Images\nurse_nobg_128.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
 	  </None>
 	  <None Update="ScanPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>

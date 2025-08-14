@@ -42,6 +42,9 @@ namespace NurseCare.Model
         [Column("DateOfBirth")]
         public DateTime? DateOfBirth { get; set; }
 
+        [Column("BedId")]
+        public string? BedId { get; set; } = string.Empty;
+
         [Column("Disease")]
         [MySQLCollation("utf8mb4_general_ci")]
         public string? Disease { get; set; } = string.Empty;
@@ -58,6 +61,10 @@ namespace NurseCare.Model
 
         [Column("ContactPhone")]
         public string? ContactPhone { get; set; } = string.Empty;
+
+        [Column("ImageUrl")]
+        [MySQLCollation("utf8mb4_general_ci")]
+        public string? ImageUrl { get; set; } = string.Empty;
     }
 
     [MySQLCharset("utf8mb4")]

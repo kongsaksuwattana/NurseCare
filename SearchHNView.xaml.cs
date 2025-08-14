@@ -1,11 +1,14 @@
-using ZXing.Net.Maui;
-using ZXing.Net.Maui.Controls;
+using NurseCare.DataAccess;
+using NurseCare.Model;
 namespace NurseCare;
 
 public partial class SearchHNView : ContentView
 {
     //CameraBarcodeReaderView barcodeReader;
-
+    NurseCareDataQuery dataQuery = new NurseCareDataQuery();
+    public Patient? searchPatient { get; set; } = null;
+    public event EventHandler<Patient?>? PatientSelected;
+    public bool isFromCamera { get; set; } = false;
     public SearchHNView()
 	{
 		InitializeComponent();
@@ -21,32 +24,23 @@ public partial class SearchHNView : ContentView
         await Navigation.PushAsync(barcodeScannerPage);
         //await Navigation.PushAsync(barcodeScannerPage);
         SearchEntry.Text = await barcodeScannerPage.GetBarcodeAsync(); // Set the Entry text to the scanned barcode value
+        isFromCamera = true; // Set the flag to indicate that the search is from camera input
+    }
 
+    private async void SearchEntry_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        Patient? patient = await dataQuery.GetPatientByHN(SearchEntry.Text);
+        if (patient != null)
+        {
+            searchPatient = patient;
+            PatientSelected?.Invoke(this, searchPatient);
+            // Display patient details or update UI as needed
+          
+        }
+        else
+        {
+            searchPatient = null;            
+        }
 
-
-        //barcodeReader = new CameraBarcodeReaderView
-        //{
-        //    HorizontalOptions = LayoutOptions.Fill,
-        //    VerticalOptions = LayoutOptions.Fill,
-        //    IsDetecting = true, // Start scanning immediately
-        //    IsVisible = true
-        //};
-
-        //barcodeReader.BarcodesDetected += (s, e) =>
-        //{
-        //    MainThread.BeginInvokeOnMainThread(() =>
-        //    {
-        //        var result = e.Results.FirstOrDefault();
-        //        if (result != null)
-        //        {
-        //            //DisplayAlert("Barcode Detected", result.Value, "OK");
-        //            SearchEntry.Text = result.Value; // Set the detected barcode value to the Entry
-        //            barcodeReader.IsDetecting = false; // Stop scanning after detection
-        //            barcodeReader.IsVisible = false;
-
-        //        }
-        //    });
-        //};
-        //CameraView.Children.Add(barcodeReader);
     }
 }

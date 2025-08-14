@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="NurseCare.TurnBedriddenView">
+             x:Class="NurseCare.TurnBedriddenView"
+             Loaded="ContentView_Loaded">
     <VerticalStackLayout  Padding="10" Spacing="6">
         <Label 
             Text="Turning Bedridden"
@@ -10,24 +11,64 @@
             FontSize="Medium"/>
         <Grid x:Name="SearchViewGrid"/>       
         <Entry x:Name="PatientNameEntry" Placeholder="Patient Name"/>
-        <Grid ColumnDefinitions="Auto,*">
+        <Grid ColumnDefinitions="*,*">
             <Entry Grid.Column="0" x:Name="AgeEntry" Placeholder="Age"/>
             <Entry Grid.Column="1" x:Name="DiseaseEntry" Placeholder="Disease"/>
         </Grid>
+        <HorizontalStackLayout>
+            <Label Text="Change Bed" VerticalTextAlignment="Center"/>
+            <Switch x:Name="ChangeBedSwitch" IsToggled="False" Toggled="ChangeBedSwitch_Toggled"/>
+        </HorizontalStackLayout>
         <Grid ColumnDefinitions="*,*,*">
             <Entry Grid.Column="0" x:Name="BedIDEntry" Placeholder="Bed ID" IsEnabled="False"/>
-            <Button Grid.Column="1" x:Name="ChangeBedButton" Text="Change" MaximumWidthRequest="80" Clicked="ChangeBedButton_Clicked"/>
-            <Picker Grid.Column="2" x:Name="ChangedBedIdPicker"/>
+            <Label Grid.Column="1" x:Name="ChangeBedButton" Text="Change bed" MaximumWidthRequest="80" VerticalTextAlignment="Center" IsVisible="False"/>
+            <Picker Grid.Column="2" x:Name="ChangedBedIdPicker" SelectedIndexChanged="ChangedBedIdPicker_SelectedIndexChanged" IsVisible="False"/>
         </Grid>
-        
+        <Grid ColumnDefinitions="*,*,Auto">
+            <Label Grid.Column="0" Text="Repeat every:" VerticalTextAlignment="Center"/>
+            <Entry Grid.Column="1" x:Name="RepeatIntervalEntry" Text="2" HorizontalTextAlignment="Center" Keyboard="Numeric" TextChanged="RepeatIntervalEntry_TextChanged"/>
+            <Label Grid.Column="2" Text="hour" VerticalTextAlignment="Center"/>
+        </Grid>
         <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*,*">
             <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" FontSize="Small" Text="Turning Time"/>
-            <DatePicker Grid.Column="0" Grid.Row="1" x:Name="TurnDate"/>
-            <TimePicker Grid.Column="1" Grid.Row="1" x:Name="TurnTime"/>
+            <DatePicker Grid.Column="0" Grid.Row="1" x:Name="TurnDate" DateSelected="TurnDate_DateSelected"/>
+            <TimePicker Grid.Column="1" Grid.Row="1" x:Name="TurnTime" PropertyChanged="TurnTime_PropertyChanged"/>
             <Label Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" FontSize="Small" Text="Next Turning Time"/>
             <DatePicker Grid.Column="0" Grid.Row="3" x:Name="NextTurnDate"/>
             <TimePicker Grid.Column="1" Grid.Row="3" x:Name="NextTurnTime"/>
         </Grid>
+        <Grid ColumnDefinitions="Auto,*,*" RowDefinitions="*,*">
+            <Label Grid.Column="0" Grid.Row="0" Text="Turn posture:" VerticalTextAlignment="Center"/>
+            <RadioButton Grid.Column="0" Grid.Row="1" x:Name="LeftSideRadioButton" Content="Left" GroupName="TurnPostureRd" Value="0" CheckedChanged="PostureRadioButton_CheckedChanged"/>
+            <RadioButton Grid.Column="1" Grid.Row="1" x:Name="RightSideRadioButton" Content="Right" GroupName="TurnPostureRd" Value="1" CheckedChanged="PostureRadioButton_CheckedChanged"/>
+            <RadioButton Grid.Column="2" Grid.Row="1" x:Name="SupineRadioButton" Content="Supine" GroupName="TurnPostureRd" Value="2" CheckedChanged="PostureRadioButton_CheckedChanged"/>
+        </Grid>
+        <Grid ColumnDefinitions="Auto,*" RowDefinitions="*,*,*,*,*">
+            <Label Text="Checklist:" VerticalTextAlignment="Center"/>
+            <CheckBox Grid.Column="0" Grid.Row="1" x:Name="OCCIPUT_cb" HorizontalOptions="Center"  HeightRequest="30" WidthRequest="30"/>
+            <Label Text="OCCIPUT"  Grid.Column="1" Grid.Row="1" VerticalTextAlignment="Center"/>
+            <CheckBox Grid.Column="0" Grid.Row="2" x:Name="SCAPULA_cb" HorizontalOptions="Center"  HeightRequest="30" WidthRequest="30"/>
+            <Label Text="SCAPULA"  Grid.Column="1" Grid.Row="2" VerticalTextAlignment="Center"/>
+            <CheckBox Grid.Column="0" Grid.Row="3" x:Name="SACRUM_cb" HorizontalOptions="Center"  HeightRequest="30" WidthRequest="30"/>
+            <Label Text="SACRUM/COCCYX"  Grid.Column="1" Grid.Row="3" VerticalTextAlignment="Center"/>
+            <CheckBox Grid.Column="0" Grid.Row="4" x:Name="HEEL_cb" HorizontalOptions="Center"  HeightRequest="30" WidthRequest="30"/>
+            <Label Text="HEEL"  Grid.Column="1" Grid.Row="4" VerticalTextAlignment="Center"/>
+        </Grid>
         <Button x:Name="SaveTurnButton" Clicked="SaveTurnButton_Clicked" Text="Record"/>
+        <HorizontalStackLayout>
+        <Label Text="Take a picture of the patient" FontSize="Small" HorizontalOptions="Center" VerticalTextAlignment="Center"/>
+        <ImageButton x:Name="TakePicture" 
+                        Source="camera.png"
+                        HorizontalOptions="End"
+                        VerticalOptions="End"
+                        HeightRequest="50"
+                        WidthRequest="50"
+                        Clicked="TakePicture_Clicked"/>
+        </HorizontalStackLayout>
+        <Image x:Name="CapturedImage"
+               HeightRequest="300"
+               Aspect="AspectFill"
+               BackgroundColor="LightGray"/>
+        
     </VerticalStackLayout>
 </ContentView>

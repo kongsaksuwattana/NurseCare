@@ -76,6 +76,22 @@ namespace NurseCare.DataAccess
                 return new List<Model.Patient>();
             }
         }
+        public async Task<Patient?> GetPatientByHN(string hn)
+        {
+            try
+            {
+                // Fetch a patient by HN from the database
+                return await Task.Run(() => 
+                    dBContext.Patients.FirstOrDefault(p => p.HN.Contains(hn)));
+                //return  dBContext.Patients.FirstOrDefault(p => p.HN.Contains(hn));
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions, e.g., log the error
+                Console.WriteLine($"Error fetching patient by HN: {ex.Message} {ex.Source}");
+                return null;
+            }
+        }
         #endregion
 
         #region Update Team Operations
@@ -122,6 +138,8 @@ namespace NurseCare.DataAccess
                 return new List<Model.ContactAddress>();
             }
         }
+        
+        #region Bed Operations
         public List<Bed> GetBeds()
         {
             try
@@ -134,6 +152,20 @@ namespace NurseCare.DataAccess
                 // Handle exceptions, e.g., log the error
                 Console.WriteLine($"Error fetching beds: {ex.Message} {ex.Source}");
                 return new List<Bed>();
+            }
+        }
+        public Bed? GetBedById(string bedId)
+        {
+            try
+            {
+                // Fetch a bed by ID from the database
+                return dBContext.Beds.FirstOrDefault(b => b.BedId == bedId);
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions, e.g., log the error
+                Console.WriteLine($"Error fetching bed by ID: {ex.Message} {ex.Source}");
+                return null;
             }
         }
         public List<Bed> GetVacantBeds()
@@ -178,5 +210,52 @@ namespace NurseCare.DataAccess
                 return null;
             }
         }
+        public UpdateBedInfo? GetLastUpdatedBedInfoById(string patientId)
+        {
+            try
+            {
+                // Fetch the last updated bed info by PatientId from the database
+                return dBContext.UpdateBedInfos.Where(u => u.PatientId == patientId).OrderByDescending(u => u.UpdateDateTime).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions, e.g., log the error
+                Console.WriteLine($"Error fetching last updated bed info by PatientId: {ex.Message} {ex.Source}");
+                return null;
+            }
+        }
+        
+        public List<UpdateBedInfo>? GetallNotifyByPatientId(string patientId)
+        {
+            List<UpdateBedInfo> notifyList = new List<UpdateBedInfo>();
+            try
+            {
+                // Fetch all notify updates by PatientId from the database
+                notifyList = dBContext.UpdateBedInfos.Where(u => u.PatientId == patientId && u.IsNotifying).ToList();
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions, e.g., log the error
+                Console.WriteLine($"Error fetching notify updates by PatientId: {ex.Message} {ex.Source}");
+            }
+            return notifyList;
+        }
+
+        public List<UpdateBedInfoAndEffect>? GetallNotify()
+        {
+            List<UpdateBedInfoAndEffect> notifyList = new List<UpdateBedInfoAndEffect>();
+            try
+            {
+                // Fetch all notify updates by PatientId from the database
+                notifyList = dBContext.BedInfoAndEffects.Where(u => u.IsNotifying).ToList();
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions, e.g., log the error
+                Console.WriteLine($"Error fetching notify updates by PatientId: {ex.Message} {ex.Source}");
+            }
+            return notifyList;
+        }
+        #endregion
     }
 }

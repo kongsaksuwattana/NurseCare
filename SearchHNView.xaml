@@ -8,7 +8,9 @@
         <!--<zxing:CameraBarcodeReaderView
               x:Name="cameraBarcodeReaderView"
               BarcodesDetected="BarcodesDetected" />-->    
-        <Entry Grid.Column="0" x:Name="SearchEntry" Placeholder="Search by Patient Name,HN" Margin="10" />        
+        <Entry Grid.Column="0" x:Name="SearchEntry" Placeholder="Search by Patient HN" Margin="10" 
+               TextChanged="SearchEntry_TextChanged"
+               />        
         <ImageButton Grid.Column="1" Source="scancode.png" 
                VerticalOptions="Center" HorizontalOptions="End" 
                Margin="10" WidthRequest="30" HeightRequest="30"

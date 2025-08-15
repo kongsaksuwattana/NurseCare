@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:NurseCare.Model"
              x:Class="NurseCare.UserRegister"  
-             Title="User Register">  
+             Title="User Register">
+    <ContentPage.BindingContext>
+        <local:LanguageViewModel x:Name="LangVM" />        
+    </ContentPage.BindingContext>
     <ScrollView >  
-    <VerticalStackLayout>  
-        <Label   
-            Text="Rigistration"  
+    <VerticalStackLayout>
+            <HorizontalStackLayout>
+                <Label Text="{Binding Language}"/>
+                <Switch IsToggled="False"
+                x:Name="SelectLanguageToggle"
+                VerticalOptions="Center"
+                HorizontalOptions="End"
+                Margin="5"
+                Toggled="SelectLanguageToggle_Toggled"                
+                />  
+            </HorizontalStackLayout>
+            <Label   
+            Text="{Binding NurseRegister}"  
             VerticalOptions="Center"   
             HorizontalOptions="Center"   
             FontSize="Title"  
@@ -18,12 +32,12 @@
            HasShadow="True">      
             <VerticalStackLayout Padding="16" Spacing="8">  
                 <Grid ColumnDefinitions="*,Auto">  
-                    <Label Grid.Column="0" Text="Nurse Registration" FontSize="Medium"/>  
+                    <Label Grid.Column="0" Text="{Binding NurseRegister}" FontSize="Medium"/>  
                     <Image Grid.Column="1" Source="nurse_1.png" MaximumHeightRequest="80" HorizontalOptions="End"/>  
                 </Grid>  
-                <Entry  x:Name="UsernameEntry"  Placeholder="Username"/>  
+                <Entry  x:Name="UsernameEntry"  Placeholder="{Binding Username}"/>  
                     <Grid ColumnDefinitions="*,Auto">  
-                    <Entry Grid.Column="0"  x:Name="PasswordEntry"  Placeholder="Password" IsPassword="{Binding IsPasswordHidden}"/>  
+                    <Entry Grid.Column="0"  x:Name="PasswordEntry"  Placeholder="{Binding Password}" IsPassword="{Binding IsPasswordHidden}"/>  
                         <ImageButton  
                             Grid.Column="1"
                             x:Name="ViewPassword"                          
@@ -34,19 +48,19 @@
                             Command="{Binding TogglePasswordVisibilityCommand}"  
                             />  
                     </Grid>  
-                    <Entry x:Name="ConfirmPasswordEntry" Placeholder="Confirm Password" Margin="0,0,0,20" IsPassword="{Binding IsPasswordHidden}"/>  
+                    <Entry x:Name="ConfirmPasswordEntry" Placeholder="{Binding PasswordConfirm}" Margin="0,0,0,20" IsPassword="{Binding IsPasswordHidden}"/>  
                   
-                <Entry x:Name="NurseFirstName" Placeholder="First Name"/>  
-                <Entry x:Name="NurseLastName" Placeholder="Last Name"/>  
-                <Entry x:Name="NurseNickName" Placeholder="Nick Name"/>  
-                <Entry x:Name="NurseEmployeeId" Placeholder="Employee ID"/>  
+                <Entry x:Name="NurseFirstName" Placeholder="{Binding FirstName}"/>  
+                <Entry x:Name="NurseLastName" Placeholder="{Binding LastName}"/>  
+                <Entry x:Name="NurseNickName" Placeholder="{Binding Nickname}"/>  
+                <Entry x:Name="NurseEmployeeId" Placeholder="{Binding EmployeeID}"/>  
                 <!--<DatePicker x:Name="NurseDateOfHire"/>-->  
-                <Entry x:Name="NurseDepartment" Placeholder="Department"/>  
-                <Picker x:Name="NurseTeamPicker" Title="Team"/>  
+                <Entry x:Name="NurseDepartment" Placeholder="{Binding Department}"/>  
+                <Picker x:Name="NurseTeamPicker" Title="{Binding Team}"/>  
   
                 <Label Text="Contact info" FontSize="Subtitle" HorizontalTextAlignment="Start" Margin="0,20,0,0"/>  
-                <Entry x:Name="NursePhoneNumber" Placeholder="Phone Number" Keyboard="Telephone"/>  
-                <Entry x:Name="NurseEmail" Placeholder="Email" Keyboard="Email"/>  
+                <Entry x:Name="NursePhoneNumber" Placeholder="{Binding PhoneNumber}" Keyboard="Telephone"/>  
+                <Entry x:Name="NurseEmail" Placeholder="{Binding Email}" Keyboard="Email"/>  
                 <Entry x:Name="NurseAddress1" Placeholder="Address 1"/>  
                 <Entry x:Name="NurseAddress2" Placeholder="Address 2"/>  
                 <Button Text="Register Nurse" Clicked="OnRegisterNurseClicked"/>  

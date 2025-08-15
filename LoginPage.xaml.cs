@@ -1,9 +1,10 @@
 using NurseCare.DataAccess;
+using NurseCare.Model;
 namespace NurseCare;
-
 public partial class LoginPage : ContentPage
-{
-	public LoginPage()
+{    
+    UserRegister userRegisterPage = new UserRegister();
+    public LoginPage()
 	{
 		InitializeComponent();
         // Auto-fill if remembered
@@ -13,9 +14,16 @@ public partial class LoginPage : ContentPage
             PasswordEntry.Text = Preferences.Get("password", "");
             RememberCheckbox.IsChecked = true;
         }
-
+        PrivacyPolicyLabel.GestureRecognizers.Add(new TapGestureRecognizer
+        {
+            Command = new Command(() =>
+            {
+                Launcher.OpenAsync("https://privacypolicy-bccgfxgxdgcqejgh.southeastasia-01.azurewebsites.net/privacypolicy.html");
+            })
+        });
 
     }
+    
 
     private async void LoginButton_Clicked(object sender, EventArgs e)
     {
@@ -61,6 +69,13 @@ public partial class LoginPage : ContentPage
 
     private void RegisterButton_Clicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new UserRegister());
+        Navigation.PushAsync(userRegisterPage);
+    }
+
+    private void SelectLanguageToggle_Toggled(object sender, ToggledEventArgs e)
+    {
+        var selectedLang = e.Value ? "th" : "en";
+        var vm = (LanguageViewModel)BindingContext;
+        vm.ChangeLanguage(selectedLang);
     }
 }

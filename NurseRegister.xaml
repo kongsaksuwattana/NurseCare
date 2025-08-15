@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:NurseCare.Model"
              x:Class="NurseCare.NurseRegister"
-             Title="Nurse">
+             Title="Nurse">    
     <ContentPage.Resources>
         <Style TargetType="Entry">
             <Setter Property="Margin" Value="0,4"/>
@@ -11,6 +12,9 @@
             <Setter Property="FontAttributes" Value="Bold"/>
         </Style>
     </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <local:LanguageViewModel x:Name="LangVM" />
+    </ContentPage.BindingContext>
     <ScrollView>
     <Grid x:Name="MainGrid"
       Padding="20"
@@ -60,17 +64,17 @@
             CornerRadius="12"
             HasShadow="True">
              <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
-                <Label Grid.Column="0" Grid.Row="0" Text="Nurse Registration" FontSize="Medium"/>
+                <Label Grid.Column="0" Grid.Row="0" Text="{Binding NurseRegister}" FontSize="Medium"/>
                 <Image Grid.Column="1" Grid.Row="0" Source="nurse_1.png" MaximumHeightRequest="80" HorizontalOptions="End"/>
 
                 <VerticalStackLayout Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Padding="16" Spacing="8" IsVisible="False">               
-                    <Entry x:Name="NurseFirstName" Placeholder="First Name"/>
-                    <Entry x:Name="NurseLastName" Placeholder="Last Name"/>
-                    <Entry x:Name="NurseNickName" Placeholder="Nick Name"/>
-                    <Entry x:Name="NurseEmployeeId" Placeholder="Employee ID"/>
+                    <Entry x:Name="NurseFirstName" Placeholder="{Binding FirstName}"/>
+                    <Entry x:Name="NurseLastName" Placeholder="{Binding LastName}"/>
+                    <Entry x:Name="NurseNickName" Placeholder="{Binding Nickname}"/>
+                    <Entry x:Name="NurseEmployeeId" Placeholder="{Binding EmployeeID}"/>
                     <!--<DatePicker x:Name="NurseDateOfHire"/>-->
-                    <Entry x:Name="NurseDepartment" Placeholder="Department"/>
-                    <Picker x:Name="NurseTeamPicker" Title="Team"/>
+                    <Entry x:Name="NurseDepartment" Placeholder="{Binding Department}"/>
+                    <Picker x:Name="NurseTeamPicker" Title="{Binding Team}"/>
                     <Button Text="Register Nurse" Clicked="OnRegisterNurseClicked"/>
                 </VerticalStackLayout>
             </Grid>

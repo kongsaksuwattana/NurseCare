@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:NurseCare.Model"
              x:Class="NurseCare.PatientPage"
              Title="PatientPage"
              Loaded="ContentPage_Loaded">
+    <ContentPage.BindingContext>
+        <local:LanguageViewModel x:Name="LangVM" />
+    </ContentPage.BindingContext>
     <ScrollView>
         <Grid x:Name="MainGrid"
       Padding="20"
@@ -51,7 +55,7 @@
            CornerRadius="12"
            HasShadow="True">
                 <Grid ColumnDefinitions="*,Auto" RowDefinitions="*,Auto">
-                    <Label Grid.Column="0" Grid.Row="0" Text="Patient Registration" FontSize="Medium"/>
+                    <Label Grid.Column="0" Grid.Row="0" Text="{Binding PatientRegister}" FontSize="Medium"/>
                     <Image Grid.Column="1" Grid.Row="0" Source="patient_2.png" MaximumHeightRequest="80" HorizontalOptions="End"/>
                     <Grid Grid.Column="0" Grid.Row="0" VerticalOptions="End" HorizontalOptions="Start" >
                         <Button x:Name="RegisterVisible" Clicked="RegisterVisible_Clicked"
@@ -62,28 +66,28 @@
                                          Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" 
                                          Padding="10" Spacing="6">
 
-                        <Entry x:Name="PatientFirstName" Placeholder="First Name"/>
-                        <Entry x:Name="PatientLastName" Placeholder="Last Name"/>
+                        <Entry x:Name="PatientFirstName" Placeholder="{Binding FirstName}"/>
+                        <Entry x:Name="PatientLastName" Placeholder="{Binding LastName}"/>
                         <HorizontalStackLayout>
                             <Entry x:Name="PatientHN" Placeholder="HN" WidthRequest="180"/>
-                            <Picker x:Name="BedIdPicker" Title="เลือกเตียง"/>
+                            <Picker x:Name="BedIdPicker" Title="{Binding BedNumber}"/>
                         </HorizontalStackLayout>
-                        <Entry x:Name="PatientDisease" Placeholder="Disease"/>
+                        <Entry x:Name="PatientDisease" Placeholder="{Binding Disease}"/>
                         <HorizontalStackLayout>
-                            <Label Text="Date of Birth" VerticalTextAlignment="Center"/>
+                            <Label Text="{Binding DateofBirth}" VerticalTextAlignment="Center"/>
                             <DatePicker x:Name="PatientDOB" MinimumWidthRequest="200" Margin="10,0"/>
                         </HorizontalStackLayout>
                         <HorizontalStackLayout>
-                            <Label Text="Admission Date" VerticalTextAlignment="Center"/>
+                            <Label Text="{Binding AdmissionDate}" VerticalTextAlignment="Center"/>
                             <DatePicker x:Name="PatientAdmissionDate" MinimumWidthRequest="200" Margin="10,0"/>
                         </HorizontalStackLayout>
                         <HorizontalStackLayout>
                             <CheckBox x:Name="IsDischargeCheck" Margin="0" WidthRequest="30" CheckedChanged="IsDischargeCheck_CheckedChanged"/>
-                            <Label Text="Discharge Date" VerticalTextAlignment="Center"/>
+                            <Label Text="{Binding DischargeDate}" VerticalTextAlignment="Center"/>
                             <DatePicker x:Name="PatientDischargeDate" MinimumWidthRequest="200" Margin="10,0" IsEnabled="False"/>
                         </HorizontalStackLayout>
-                        <Entry x:Name="PatientContactPerson" Placeholder="Contact Person"/>
-                        <Entry x:Name="PatientContactPhone" Placeholder="Contact Phone" Keyboard="Telephone"/>
+                        <Entry x:Name="PatientContactPerson" Placeholder="{Binding ContactPerson}"/>
+                        <Entry x:Name="PatientContactPhone" Placeholder="{Binding ContactPhone}" Keyboard="Telephone"/>
                         <Button Text="Register Patient" Clicked="OnRegisterPatientClicked"/>
                     </VerticalStackLayout>
                 </Grid>

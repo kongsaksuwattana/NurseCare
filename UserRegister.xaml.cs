@@ -25,12 +25,7 @@ public partial class UserRegister : ContentPage
 		InitializeComponent();
         NurseTeamPicker.ItemsSource = NurseTeam;
 		NurseTeamPicker.SelectedIndex = 0; // Default to the first team
-		ViewPassword.Source = EyeIcon; // Set initial icon for password visibility
-		//ViewPassword.GestureRecognizers.Add(new TapGestureRecognizer
-		//{
-		//	Command = TogglePasswordVisibilityCommand
-		//});
-		// Set the binding context for the page
+		ViewPassword.Source = EyeIcon; // Set initial icon for password visibility		
 		BindingContext = this;
     }
 
@@ -106,5 +101,12 @@ public partial class UserRegister : ContentPage
         }
 
        
+    }
+
+    private void SelectLanguageToggle_Toggled(object sender, ToggledEventArgs e)
+    {
+        var selectedLang = e.Value ? "th" : "en";
+
+        LangVM.ChangeLanguage(selectedLang);
     }
 }

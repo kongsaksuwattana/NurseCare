@@ -26,6 +26,7 @@ public partial class TurnBedriddenView : ContentView
     {
         if (e != null)
         {
+            ChangeBedSwitch.IsEnabled = true;
             try
             {
                 selectedPatient = e;
@@ -51,6 +52,7 @@ public partial class TurnBedriddenView : ContentView
                 Application.Current.MainPage.DisplayAlert("Error", $"Failed to display patient details {ex.Message}", "OK");
             }
         }
+        else ChangeBedSwitch.IsEnabled = false; // Disable the switch if no patient is selected
     }
     private void SaveTurnButton_Clicked(object sender, EventArgs e)
     {

@@ -1,39 +1,43 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:NurseCare.Model"
              x:Class="NurseCare.TurnBedriddenView"
              Loaded="ContentView_Loaded">
+    <ContentView.BindingContext>
+        <local:LanguageViewModel x:Name="LangVM" />
+    </ContentView.BindingContext>
     <VerticalStackLayout  Padding="10" Spacing="6">
         <Label 
-            Text="Turning Bedridden"
+            Text="{Binding TurnBed}"
             VerticalOptions="Center" 
             HorizontalOptions="Start" 
             FontSize="Medium"/>
         <Grid x:Name="SearchViewGrid"/>       
-        <Entry x:Name="PatientNameEntry" Placeholder="Patient Name"/>
+        <Entry x:Name="PatientNameEntry" Placeholder="{Binding FirstName}"/>
         <Grid ColumnDefinitions="*,*">
-            <Entry Grid.Column="0" x:Name="AgeEntry" Placeholder="Age"/>
-            <Entry Grid.Column="1" x:Name="DiseaseEntry" Placeholder="Disease"/>
+            <Entry Grid.Column="0" x:Name="AgeEntry" Placeholder="{Binding Age}"/>
+            <Entry Grid.Column="1" x:Name="DiseaseEntry" Placeholder="{Binding Disease}"/>
         </Grid>
         <HorizontalStackLayout>
-            <Label Text="Change Bed" VerticalTextAlignment="Center"/>
-            <Switch x:Name="ChangeBedSwitch" IsToggled="False" Toggled="ChangeBedSwitch_Toggled"/>
+            <Label Text="{Binding Changebed}" VerticalTextAlignment="Center"/>
+            <Switch x:Name="ChangeBedSwitch" IsToggled="False" Toggled="ChangeBedSwitch_Toggled" IsEnabled="False"/>
         </HorizontalStackLayout>
         <Grid ColumnDefinitions="*,*,*">
-            <Entry Grid.Column="0" x:Name="BedIDEntry" Placeholder="Bed ID" IsEnabled="False"/>
-            <Label Grid.Column="1" x:Name="ChangeBedButton" Text="Change bed" MaximumWidthRequest="80" VerticalTextAlignment="Center" IsVisible="False"/>
+            <Entry Grid.Column="0" x:Name="BedIDEntry" Placeholder="{Binding BedNumber}" IsEnabled="False"/>
+            <Label Grid.Column="1" x:Name="ChangeBedButton" Text="{Binding Changebed}" MaximumWidthRequest="80" VerticalTextAlignment="Center" IsVisible="False"/>
             <Picker Grid.Column="2" x:Name="ChangedBedIdPicker" SelectedIndexChanged="ChangedBedIdPicker_SelectedIndexChanged" IsVisible="False"/>
         </Grid>
         <Grid ColumnDefinitions="*,*,Auto">
-            <Label Grid.Column="0" Text="Repeat every:" VerticalTextAlignment="Center"/>
+            <Label Grid.Column="0" Text="{Binding TurningInterval}" VerticalTextAlignment="Center"/>
             <Entry Grid.Column="1" x:Name="RepeatIntervalEntry" Text="2" HorizontalTextAlignment="Center" Keyboard="Numeric" TextChanged="RepeatIntervalEntry_TextChanged"/>
-            <Label Grid.Column="2" Text="hour" VerticalTextAlignment="Center"/>
+            <Label Grid.Column="2" Text="{Binding Hour}" VerticalTextAlignment="Center"/>
         </Grid>
         <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*,*">
-            <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" FontSize="Small" Text="Turning Time"/>
+            <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" FontSize="Small" Text="{Binding TurningTime}"/>
             <DatePicker Grid.Column="0" Grid.Row="1" x:Name="TurnDate" DateSelected="TurnDate_DateSelected"/>
             <TimePicker Grid.Column="1" Grid.Row="1" x:Name="TurnTime" PropertyChanged="TurnTime_PropertyChanged"/>
-            <Label Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" FontSize="Small" Text="Next Turning Time"/>
+            <Label Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" FontSize="Small" Text="{Binding NextTurning}"/>
             <DatePicker Grid.Column="0" Grid.Row="3" x:Name="NextTurnDate"/>
             <TimePicker Grid.Column="1" Grid.Row="3" x:Name="NextTurnTime"/>
         </Grid>
